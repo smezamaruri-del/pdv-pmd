@@ -249,6 +249,46 @@
   .ebtn{flex:1;padding:12px;border-radius:12px;font-size:14px;font-weight:750}
   .ebtn.ghost{background:var(--paper2);color:var(--ink)}
   .ebtn.solid{background:var(--teal);color:#fff}
+  /* Encargos */
+  .enc-add{grid-template-columns:1fr 1.6fr auto !important}
+  .dia-row{display:flex;align-items:center;gap:11px;padding:12px 18px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .dia-row .df{flex:1;min-width:130px}
+  .dia-row .df b{font-size:14px;font-weight:700;text-transform:capitalize;display:block}
+  .dia-row .df small{font-size:12px;color:var(--ink2)}
+  .dia-badge{font-size:10.5px;font-weight:750;text-transform:uppercase;letter-spacing:.4px;padding:3px 9px;border-radius:999px}
+  .dia-badge.on{color:var(--ok);background:#EDF7F0}
+  .dia-badge.off{color:var(--ink2);background:var(--paper2)}
+  .dbtn{padding:8px 13px;border-radius:9px;font-size:12.5px;font-weight:700;border:1px solid var(--line);background:var(--card);color:var(--ink2);display:inline-flex;align-items:center;gap:6px}
+  .dbtn.acc{color:var(--teal-d);border-color:var(--teal-l)}
+  .dbtn svg{width:14px;height:14px}
+  .ddel{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;border:1px solid var(--line);color:var(--ink2);background:var(--card);flex:none}
+  .ddel svg{width:15px;height:15px}
+  .ddel:hover{color:var(--danger);border-color:#E7B7AE;background:var(--danger-l)}
+  .stk-cathead{display:flex;align-items:center;gap:9px;padding:11px 18px;background:var(--csoft,#f5f5f5);font-size:13px;font-weight:750;border-top:1px solid var(--line)}
+  .stk-cathead .dot{width:11px;height:11px;border-radius:4px;background:var(--cc)}
+  .stk-row{display:flex;align-items:center;gap:12px;padding:10px 18px;border-top:1px solid var(--line)}
+  .stk-row .sn{flex:1;min-width:0;font-size:13.5px;font-weight:600}
+  .stk-row .sn small{display:block;font-size:11.5px;color:var(--ink2);font-weight:500}
+  .stk-row input{width:76px;padding:9px 10px;border:1px solid var(--line);border-radius:9px;font-size:15px;font-weight:700;text-align:center;background:var(--paper)}
+  .pedfilter{display:flex;gap:6px}
+  .pfch{padding:7px 13px;border-radius:9px;font-size:12.5px;font-weight:700;color:var(--ink2);background:var(--paper2)}
+  .pfch.active{background:var(--teal);color:#fff}
+  .ped-card{border-top:1px solid var(--line);padding:14px 18px}
+  .ped-top{display:flex;align-items:flex-start;gap:10px;justify-content:space-between}
+  .ped-who b{font-size:14.5px;font-weight:700}
+  .ped-who small{display:block;font-size:12.5px;color:var(--ink2);margin-top:1px}
+  .ped-est{font-size:10.5px;font-weight:750;text-transform:uppercase;letter-spacing:.4px;padding:4px 10px;border-radius:999px;white-space:nowrap}
+  .ped-est.pendiente{color:var(--amber);background:#FBF0DC}
+  .ped-est.entregado{color:var(--ok);background:#EDF7F0}
+  .ped-est.cancelado{color:var(--danger);background:var(--danger-l)}
+  .ped-items{font-size:13px;color:var(--ink);margin:9px 0;line-height:1.6}
+  .ped-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .ped-tot{font-size:15px;font-weight:800}
+  .ped-acts{display:flex;gap:7px}
+  .pact{padding:8px 13px;border-radius:9px;font-size:12.5px;font-weight:700;border:1px solid var(--line);background:var(--card)}
+  .pact.ok{color:#fff;background:var(--teal);border-color:var(--teal)}
+  .pact.cancel{color:var(--danger);border-color:#E7B7AE}
+  @media(max-width:860px){.enc-add{grid-template-columns:1fr 1fr !important}.enc-add .field:first-child{grid-column:auto}.enc-add .xbtn.solid{grid-column:1/-1;justify-content:center}}
 
   #receipt{position:fixed;inset:0;z-index:70;background:rgba(43,38,34,.5);display:none;align-items:center;justify-content:center;padding:20px}
   #receipt.show{display:flex}
@@ -357,6 +397,7 @@
         <button class="tab active" data-view="sell">Vender</button>
         <button class="tab tab-admin" data-view="summary">Resumen</button>
         <button class="tab tab-admin" data-view="admin">Productos</button>
+        <button class="tab tab-admin" data-view="encargos">Encargos</button>
       </div>
       <div class="who">
         <div class="avatar" id="avatar">·</div>
@@ -435,6 +476,32 @@
       </div>
       <div id="catList"></div>
       <div class="hint">Cambia <b>nombre</b>, <b>color</b> u <b>orden</b> (menor aparece primero) y presiona <b>Guardar</b>. Una sección solo se puede eliminar si no tiene productos.</div>
+    </div>
+  </section>
+
+  <section class="view" id="view-encargos">
+    <div class="panel"><div class="ph"><h3>Abrir un día para pedidos</h3></div>
+      <div class="adm-add enc-add">
+        <div class="field"><label>Fecha</label><input id="ndDate" type="date"></div>
+        <div class="field"><label>Nota (opcional)</label><input id="ndNota" placeholder="Ej: Solo retiro por la mañana"></div>
+        <button class="xbtn solid" id="ndAdd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Abrir día</button>
+      </div>
+      <div id="diasList"></div>
+      <div class="hint">Abre uno o más días. Con <b>Definir stock</b> indicas cuántas unidades de cada producto ofreces ese día. <b>Cerrar</b> lo oculta de la carta sin borrar los pedidos. Puedes tener varios días abiertos a la vez.</div>
+    </div>
+
+    <div class="panel" id="stockPanel" style="display:none"><div class="ph"><h3 id="stockTitle">Stock del día</h3><button class="xbtn solid" id="stockSave"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Guardar stock</button></div>
+      <div id="stockList"></div>
+      <div class="hint">Escribe la cantidad que ofreces de cada producto ese día. <b>0</b> = no se ofrece. Lo ya reservado por clientes no se puede bajar por debajo.</div>
+    </div>
+
+    <div class="panel"><div class="ph"><h3>Pedidos recibidos</h3>
+      <div class="pedfilter" id="pedFilter">
+        <button class="pfch active" data-f="pendiente">Pendientes</button>
+        <button class="pfch" data-f="todos">Todos</button>
+      </div>
+    </div>
+      <div id="pedidosList"></div>
     </div>
   </section>
 </div>
@@ -909,6 +976,112 @@ function renderCategorias(){
   };
 }
 
+/* ================= Encargos: días, stock, pedidos ================= */
+const DIAS_SEM=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+const MESES_L=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+function fechaLarga(s){const [y,m,d]=s.split("-").map(Number);const dt=new Date(y,m-1,d);return DIAS_SEM[dt.getDay()]+" "+d+" de "+MESES_L[m-1];}
+let DIAS=[], stockDiaSel=null, pedFilter="pendiente", PEDIDOS=[];
+
+async function renderEncargos(){
+  await loadDias();
+  await loadPedidos();
+}
+async function loadDias(){
+  const r=await db.from("dias_pedido").select("id,fecha,abierto,nota").order("fecha",{ascending:false});
+  if(r.error){toast("No se pudieron cargar los días.",true);return;}
+  DIAS=r.data; renderDias();
+}
+function renderDias(){
+  const el=document.getElementById("diasList");
+  if(DIAS.length===0){ el.innerHTML=`<div class="hint" style="padding:16px 18px">Aún no has abierto ningún día.</div>`; return; }
+  el.innerHTML=DIAS.map(d=>`<div class="dia-row">
+    <div class="df"><b>${fechaLarga(d.fecha)}</b>${d.nota?`<small>${d.nota}</small>`:""}</div>
+    <span class="dia-badge ${d.abierto?"on":"off"}">${d.abierto?"Abierto":"Cerrado"}</span>
+    <button class="dbtn acc" data-stock="${d.id}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7 12 3 4 7l8 4 8-4Z"/><path d="M4 7v10l8 4 8-4V7M12 11v10"/></svg>Definir stock</button>
+    <button class="dbtn" data-toggle="${d.id}">${d.abierto?"Cerrar":"Abrir"}</button>
+    <button class="ddel" data-diadel="${d.id}" title="Eliminar día"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+  </div>`).join("");
+  el.querySelectorAll("[data-stock]").forEach(b=>b.onclick=()=>openStock(+b.dataset.stock));
+  el.querySelectorAll("[data-toggle]").forEach(b=>b.onclick=async()=>{const d=DIAS.find(x=>x.id===+b.dataset.toggle);const r=await db.from("dias_pedido").update({abierto:!d.abierto}).eq("id",d.id);if(r.error){toast("No se pudo cambiar.",true);return;}d.abierto=!d.abierto;renderDias();toast(d.abierto?"Día abierto":"Día cerrado");});
+  el.querySelectorAll("[data-diadel]").forEach(b=>b.onclick=async()=>{const id=+b.dataset.diadel;if(!confirm("¿Eliminar este día? Se borrarán su stock y sus pedidos."))return;const r=await db.from("dias_pedido").delete().eq("id",id);if(r.error){toast("No se pudo eliminar.",true);return;}if(stockDiaSel===id){stockDiaSel=null;document.getElementById("stockPanel").style.display="none";}await loadDias();await loadPedidos();toast("Día eliminado");});
+}
+async function addDia(){
+  const fecha=document.getElementById("ndDate").value;
+  const nota=document.getElementById("ndNota").value.trim()||null;
+  if(!fecha){toast("Elige una fecha",true);return;}
+  const r=await db.from("dias_pedido").insert({fecha,nota}).select().single();
+  if(r.error){ if(isFK(r.error)||/duplicate|unique/i.test(r.error.message||"")) toast("Ese día ya está abierto.",true); else toast("No se pudo abrir el día.",true); return; }
+  document.getElementById("ndDate").value="";document.getElementById("ndNota").value="";
+  await loadDias(); toast("Día abierto: "+fechaLarga(fecha));
+}
+async function openStock(diaId){
+  stockDiaSel=diaId;
+  const d=DIAS.find(x=>x.id===diaId);
+  document.getElementById("stockTitle").textContent="Stock · "+fechaLarga(d.fecha);
+  document.getElementById("stockPanel").style.display="";
+  const el=document.getElementById("stockList");
+  el.innerHTML=`<div class="hint" style="padding:16px 18px">Cargando…</div>`;
+  const r=await db.from("stock_disponible").select("producto_id,cantidad_total,disponible").eq("dia_id",diaId);
+  const cur={}; if(!r.error) r.data.forEach(s=>cur[s.producto_id]={total:s.cantidad_total,disp:s.disponible});
+  el.innerHTML=CATS.map(c=>{const items=PRODS.filter(p=>p.categoria_id===c.id&&p.activo);if(items.length===0)return "";
+    return `<div class="stk-cathead" style="--cc:${c.color};--csoft:${soften(c.color)}"><span class="dot"></span>${c.nombre}</div>
+      ${items.map(p=>{const s=cur[p.id];const total=s?s.total:0;const reservado=s?(s.total-s.disp):0;
+        return `<div class="stk-row"><div class="sn">${p.nombre}${reservado>0?`<small>${reservado} ya reservado(s)</small>`:""}</div>
+        <input type="number" min="${reservado}" step="1" value="${total}" data-stk="${p.id}" data-min="${reservado}"></div>`;}).join("")}`;
+  }).join("");
+  document.getElementById("stockPanel").scrollIntoView({behavior:"smooth",block:"start"});
+}
+async function saveStock(){
+  if(stockDiaSel==null)return;
+  const inputs=document.querySelectorAll("#stockList [data-stk]");
+  const ups=[], dels=[]; let bad=false;
+  inputs.forEach(inp=>{const pid=+inp.dataset.stk;const min=+inp.dataset.min;let v=parseInt(inp.value,10);if(isNaN(v)||v<0)v=0;if(v<min){bad=true;}if(v===0&&min===0){dels.push(pid);}else{ups.push({dia_id:stockDiaSel,producto_id:pid,cantidad_total:Math.max(v,min)});}});
+  if(bad){toast("No puedes ofrecer menos de lo ya reservado.",true);}
+  try{
+    if(ups.length){const r=await db.from("stock_dia").upsert(ups,{onConflict:"dia_id,producto_id"});if(r.error)throw r.error;}
+    if(dels.length){const r=await db.from("stock_dia").delete().eq("dia_id",stockDiaSel).in("producto_id",dels);if(r.error)throw r.error;}
+    toast("Stock guardado");
+  }catch(e){console.error(e);toast("No se pudo guardar el stock.",true);}
+}
+
+async function loadPedidos(){
+  let q=db.from("pedidos").select("id,dia_id,cliente_nombre,cliente_telefono,hora_retiro,total,estado,creado,pedido_items(nombre,cantidad)").order("creado",{ascending:false});
+  if(pedFilter==="pendiente") q=q.eq("estado","pendiente");
+  const r=await q;
+  if(r.error){toast("No se pudieron cargar los pedidos.",true);return;}
+  PEDIDOS=r.data; renderPedidos();
+}
+function renderPedidos(){
+  const el=document.getElementById("pedidosList");
+  if(PEDIDOS.length===0){ el.innerHTML=`<div class="hint" style="padding:16px 18px">No hay pedidos ${pedFilter==="pendiente"?"pendientes":""}.</div>`; return; }
+  el.innerHTML=PEDIDOS.map(p=>{
+    const dia=DIAS.find(x=>x.id===p.dia_id);
+    const fechaTxt=dia?fechaLarga(dia.fecha):"—";
+    const items=(p.pedido_items||[]).map(i=>i.cantidad+"× "+i.nombre).join(", ");
+    return `<div class="ped-card">
+      <div class="ped-top">
+        <div class="ped-who"><b>${p.cliente_nombre}</b><small>${p.cliente_telefono}${p.hora_retiro?" · retiro "+p.hora_retiro:""}</small><small>Para el ${fechaTxt}</small></div>
+        <span class="ped-est ${p.estado}">${p.estado}</span>
+      </div>
+      <div class="ped-items">${items}</div>
+      <div class="ped-foot">
+        <span class="ped-tot">${clp(p.total)}</span>
+        <div class="ped-acts">
+          ${p.estado==="pendiente"?`<a class="pact" href="https://wa.me/${(p.cliente_telefono||"").replace(/[^0-9]/g,"")}" target="_blank" rel="noopener">WhatsApp</a><button class="pact ok" data-entregar="${p.id}">Entregado</button><button class="pact cancel" data-cancelar="${p.id}">Cancelar</button>`:""}
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+  el.querySelectorAll("[data-entregar]").forEach(b=>b.onclick=()=>setEstado(+b.dataset.entregar,"entregado"));
+  el.querySelectorAll("[data-cancelar]").forEach(b=>b.onclick=()=>{ if(confirm("¿Cancelar este pedido? El stock volverá a quedar disponible.")) setEstado(+b.dataset.cancelar,"cancelado"); });
+}
+async function setEstado(id,estado){
+  const r=await db.from("pedidos").update({estado}).eq("id",id);
+  if(r.error){toast("No se pudo actualizar.",true);return;}
+  await loadPedidos();
+  toast(estado==="entregado"?"Pedido entregado":"Pedido cancelado");
+}
+
 /* ================= Toast / navegación ================= */
 let toastT;
 function toast(msg,isErr){const el=document.getElementById("toast");el.className=isErr?"err":"";el.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">${isErr?'<circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/':'<path d="M20 6 9 17l-5-5"/'}></svg>${msg}`;el.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove("show"),2400);}
@@ -921,8 +1094,10 @@ async function switchView(v){
   document.getElementById("cart").style.display=v==="sell"?"":"none";
   document.getElementById("view-summary").classList.toggle("active",v==="summary");
   document.getElementById("view-admin").classList.toggle("active",v==="admin");
+  document.getElementById("view-encargos").classList.toggle("active",v==="encargos");
   if(v==="summary"){try{await loadMonthSales();netError(false);}catch(e){netError(true);}renderSummary();}
   if(v==="admin")renderAdmin();
+  if(v==="encargos")renderEncargos();
   renderCartBar();window.scrollTo(0,0);
 }
 async function changeMonth(delta){const [y,m]=selMonth.split("-").map(Number);selMonth=monthKey(new Date(y,m-1+delta,1));try{await loadMonthSales();netError(false);}catch(e){netError(true);}renderSummary();}
@@ -961,6 +1136,9 @@ async function bootApp(){
     document.getElementById("epSave").onclick=saveEdit;
     document.getElementById("epPrice").oninput=refreshEditMarg;
     document.getElementById("epCost").oninput=refreshEditMarg;
+    document.getElementById("ndAdd").onclick=addDia;
+    document.getElementById("stockSave").onclick=saveStock;
+    document.querySelectorAll("#pedFilter .pfch").forEach(b=>b.onclick=()=>{pedFilter=b.dataset.f;document.querySelectorAll("#pedFilter .pfch").forEach(x=>x.classList.toggle("active",x===b));loadPedidos();});
   }
 
   const bar=document.createElement("div");bar.className="cartbar";bar.id="cartbar";
