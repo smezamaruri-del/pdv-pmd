@@ -1003,7 +1003,7 @@ function renderDias(){
   </div>`).join("");
   el.querySelectorAll("[data-stock]").forEach(b=>b.onclick=()=>openStock(+b.dataset.stock));
   el.querySelectorAll("[data-toggle]").forEach(b=>b.onclick=async()=>{const d=DIAS.find(x=>x.id===+b.dataset.toggle);const r=await db.from("dias_pedido").update({abierto:!d.abierto}).eq("id",d.id);if(r.error){toast("No se pudo cambiar.",true);return;}d.abierto=!d.abierto;renderDias();toast(d.abierto?"Día abierto":"Día cerrado");});
-  el.querySelectorAll("[data-diadel]").forEach(b=>b.onclick=async()=>{const id=+b.dataset.diadel;if(!confirm("¿Eliminar este día? Se borrarán su stock y sus pedidos."))return;const r=await db.from("dias_pedido").delete().eq("id",id);if(r.error){toast("No se pudo eliminar.",true);return;}if(stockDiaSel===id){stockDiaSel=null;document.getElementById("stockPanel").style.display="none";}await loadDias();await loadPedidos();toast("Día eliminado");});
+  el.querySelectorAll("[data-diadel]").forEach(b=>b.onclick=async()=>{const id=+b.dataset.diadel;if(!confirm("¿Eliminar este día? Se borrarán su stock y sus pedidos."))return;const r=await db.from("dias_pedido").delete().eq("id",id);if(r.error){console.error(r.error);toast(isFK(r.error)?"No se pudo: el día tiene pedidos. Aplica el ajuste SQL de borrado en cascada.":"No se pudo eliminar: "+(r.error.message||""),true);return;}if(stockDiaSel===id){stockDiaSel=null;document.getElementById("stockPanel").style.display="none";}await loadDias();await loadPedidos();toast("Día eliminado");});
 }
 async function addDia(){
   const fecha=document.getElementById("ndDate").value;
