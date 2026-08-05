@@ -205,6 +205,49 @@
   .srow.anulada .st b{text-decoration:line-through;text-decoration-color:var(--ink2)}
   .anultag{display:inline-block;font-size:10px;font-weight:750;text-transform:uppercase;letter-spacing:.4px;color:var(--danger);background:var(--danger-l);padding:2px 8px;border-radius:999px;vertical-align:middle;margin-left:6px;text-decoration:none}
   .srow .motivo{color:var(--danger)!important;font-style:italic}
+  /* filas de productos en admin */
+  .padm-row{display:flex;align-items:center;gap:10px;padding:11px 18px;border-top:1px solid var(--line)}
+  .padm-row .pn{flex:1;min-width:0}
+  .padm-row .pn b{font-size:13.5px;font-weight:640;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .padm-row .pn small{font-size:12px;color:var(--ink2)}
+  .padm-row .pn.off b{color:var(--ink2);text-decoration:line-through}
+  .padm-price{font-size:13.5px;font-weight:750;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .padm-acts{display:flex;gap:6px;flex:none}
+  .iact{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;border:1px solid var(--line);background:var(--card);color:var(--ink2)}
+  .iact svg{width:16px;height:16px}
+  .iact.edit:hover{color:var(--teal-d);border-color:var(--teal-l)}
+  .iact.tog.on{color:var(--ok);border-color:#BFDCCB;background:#EDF7F0}
+  .iact.del:hover{color:var(--danger);border-color:#E7B7AE;background:var(--danger-l)}
+  .adm-catadd{grid-template-columns:1.6fr .7fr auto !important}
+  .adm-catadd input[type=color]{width:100%;height:40px;padding:3px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+  .cadm-row{display:flex;align-items:center;gap:10px;padding:11px 18px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .cadm-row input[type=color]{width:40px;height:38px;padding:2px;border:1px solid var(--line);border-radius:9px;background:var(--paper);flex:none}
+  .cadm-row .cname{flex:1;min-width:120px;padding:9px 11px;border:1px solid var(--line);border-radius:9px;font-size:14px;font-weight:640;background:var(--paper);color:var(--ink)}
+  .cadm-row .cord{width:64px;padding:9px 8px;border:1px solid var(--line);border-radius:9px;font-size:13.5px;font-weight:700;text-align:center;background:var(--paper)}
+  .cadm-row .cord-l{font-size:11px;color:var(--ink2);font-weight:700}
+  .cadm-row .csave{padding:9px 13px;border-radius:9px;font-size:12.5px;font-weight:750;background:var(--teal);color:#fff;visibility:hidden}
+  .cadm-row .csave.dirty{visibility:visible}
+  .cadm-row .cdel{width:36px;height:36px;border-radius:9px;display:grid;place-items:center;border:1px solid var(--line);color:var(--ink2);background:var(--card);flex:none}
+  .cadm-row .cdel svg{width:15px;height:15px}
+  .cadm-row .cdel:hover{color:var(--danger);border-color:#E7B7AE;background:var(--danger-l)}
+  .cadm-count{font-size:11.5px;color:var(--ink2);font-weight:600;white-space:nowrap}
+  /* modal editar producto */
+  #editProd{position:fixed;inset:0;z-index:75;background:rgba(43,38,34,.5);display:none;align-items:center;justify-content:center;padding:20px}
+  #editProd.show{display:flex}
+  .ecard{width:100%;max-width:420px;background:var(--card);border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+  .ehead{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;font-size:15px;font-weight:750}
+  .ehead .ex{width:32px;height:32px;border-radius:9px;background:var(--paper2);display:grid;place-items:center}
+  .ehead .ex svg{width:16px;height:16px}
+  .ebody{padding:18px 20px;display:flex;flex-direction:column;gap:13px}
+  .erow{display:flex;gap:12px}
+  .efield{flex:1;display:flex;flex-direction:column;gap:5px}
+  .efield label{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--ink2)}
+  .efield input,.efield select{padding:11px 12px;border:1px solid var(--line);border-radius:11px;font-size:15px;font-weight:600;background:var(--paper);color:var(--ink)}
+  .emarg{font-size:13px;font-weight:700;color:var(--ink2);text-align:right}
+  .efoot{padding:14px 20px 18px;display:flex;gap:10px;border-top:1px solid var(--line)}
+  .ebtn{flex:1;padding:12px;border-radius:12px;font-size:14px;font-weight:750}
+  .ebtn.ghost{background:var(--paper2);color:var(--ink)}
+  .ebtn.solid{background:var(--teal);color:#fff}
 
   #receipt{position:fixed;inset:0;z-index:70;background:rgba(43,38,34,.5);display:none;align-items:center;justify-content:center;padding:20px}
   #receipt.show{display:flex}
@@ -380,14 +423,43 @@
         <button class="xbtn solid" id="npAdd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Agregar</button>
       </div>
     </div>
-    <div class="panel"><div class="ph"><h3>Productos y precios</h3></div><div id="admList"></div>
-      <div class="hint">Edita <b>precio</b> y <b>costo</b>; el margen se calcula solo. Presiona <b>Guardar</b> para confirmar. Con <b>Activo / Inactivo</b> ocultas un producto de la venta sin borrarlo. El margen alimenta la utilidad del Resumen.</div>
+    <div class="panel"><div class="ph"><h3>Productos</h3></div><div id="admList"></div>
+      <div class="hint"><b>Editar</b> abre el producto para cambiar nombre, categoría, precio y costo. <b>Activo/Inactivo</b> lo oculta de la venta sin borrarlo. <b>Eliminar</b> lo borra por completo (solo si no tiene ventas; si las tiene, desactívalo). Editar o borrar no altera las ventas ya registradas.</div>
+    </div>
+    <div class="panel"><div class="ph"><h3>Categorías / Secciones</h3></div>
+      <div class="adm-add adm-catadd">
+        <div class="field"><label>Nueva sección</label><input id="ncName" placeholder="Ej: Tortas"></div>
+        <div class="field"><label>Color</label><input id="ncColor" type="color" value="#1F6F63"></div>
+        <button class="xbtn solid" id="ncAdd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Crear sección</button>
+      </div>
+      <div id="catList"></div>
+      <div class="hint">Cambia <b>nombre</b>, <b>color</b> u <b>orden</b> (menor aparece primero) y presiona <b>Guardar</b>. Una sección solo se puede eliminar si no tiene productos.</div>
     </div>
   </section>
 </div>
 </div>
 
 <div class="scrim" id="scrim"></div>
+
+<!-- ============ MODAL EDITAR PRODUCTO ============ -->
+<div id="editProd">
+  <div class="ecard">
+    <div class="ehead"><b>Editar producto</b><button class="ex" id="epClose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="ebody">
+      <div class="efield"><label>Nombre</label><input id="epName"></div>
+      <div class="efield"><label>Categoría</label><select id="epCat"></select></div>
+      <div class="erow">
+        <div class="efield"><label>Precio ($)</label><input id="epPrice" type="number" min="0" step="100"></div>
+        <div class="efield"><label>Costo ($)</label><input id="epCost" type="number" min="0" step="100"></div>
+      </div>
+      <div class="emarg" id="epMarg"></div>
+    </div>
+    <div class="efoot">
+      <button class="ebtn ghost" id="epCancel">Cancelar</button>
+      <button class="ebtn solid" id="epSave">Guardar cambios</button>
+    </div>
+  </div>
+</div>
 
 <!-- ============ RECEIPT ============ -->
 <div id="receipt">
@@ -687,6 +759,20 @@ function downloadCsv(){
   rows.push(["Total",a.units,Math.round(a.rev),Math.round(a.cost),Math.round(a.margin)]);
   rows.push([]);rows.push(["Por método de pago"]);rows.push(["Método","Ventas","Ingreso ($)"]);
   PAYS.forEach(p=>rows.push([p.label,a.pay[p.id].count,Math.round(a.pay[p.id].rev)]));
+
+  // Detalle por producto (desglosado, no resumido por categoría)
+  const prodAgg={};
+  sales.forEach(s=>{ if(s.anulada) return; s.venta_items.forEach(l=>{
+    const key=l.producto_id!=null?("p"+l.producto_id):("n"+l.nombre);
+    const p=byId(l.producto_id);
+    const catNm=p?(catById(p.categoria_id)?.nombre||"—"):"(eliminado)";
+    if(!prodAgg[key]) prodAgg[key]={nombre:p?p.nombre:l.nombre, cat:catNm, catOrd:p?(catById(p.categoria_id)?.orden||999):999, units:0, rev:0};
+    prodAgg[key].units+=l.cantidad; prodAgg[key].rev+=l.cantidad*l.precio_unit;
+  });});
+  const prodRows=Object.values(prodAgg).sort((x,y)=>x.catOrd-y.catOrd||x.nombre.localeCompare(y.nombre));
+  rows.push([]);rows.push(["Detalle por producto"]);rows.push(["Categoría","Producto","Unidades","Ingreso ($)"]);
+  prodRows.forEach(p=>rows.push([p.cat,p.nombre,p.units,Math.round(p.rev)]));
+
   rows.push([]);rows.push(["Detalle de ventas (las anuladas no suman a los totales)"]);rows.push(["N°","Fecha","Hora","Método","Productos","Total ($)","Estado","Motivo anulación"]);
   sales.slice().reverse().forEach(s=>{const t=new Date(s.fecha);
     rows.push([s.id,String(t.getDate()).padStart(2,"0")+"/"+String(t.getMonth()+1).padStart(2,"0")+"/"+t.getFullYear(),String(t.getHours()).padStart(2,"0")+":"+String(t.getMinutes()).padStart(2,"0"),PAYNAME[s.metodo_pago]||s.metodo_pago,s.venta_items.map(l=>l.cantidad+"× "+l.nombre).join(" | "),Math.round(s.total),s.anulada?"ANULADA":"OK",s.anulada?(s.motivo_anul||""):""]);});
@@ -696,29 +782,127 @@ function downloadCsv(){
   toast("CSV descargado");
 }
 
+/* ================= Admin: recarga ================= */
+async function reloadCatalog(){
+  try{ await loadCatalog(); }catch(e){ toast("No se pudo recargar.",true); return; }
+  renderChips(); renderSections(); renderCart(); renderCartBar();
+  if(currentView==="admin"){ renderAdmin(); }
+}
+function isFK(err){ return err && (err.code==="23503" || /foreign key|violates/i.test(err.message||"")); }
+
 /* ================= Admin: productos ================= */
 function renderAdmin(){
-  const sel=document.getElementById("npCat");
-  sel.innerHTML=CATS.map(c=>`<option value="${c.id}">${c.nombre}</option>`).join("");
-  const el=document.getElementById("admList");
+  // selects de categoría (alta de producto y modal)
+  const opts=CATS.map(c=>`<option value="${c.id}">${c.nombre}</option>`).join("");
+  document.getElementById("npCat").innerHTML=opts;
+  document.getElementById("epCat").innerHTML=opts;
+
   const marg=(pr,co)=>{const m=pr-co;const pct=pr>0?Math.round(m/pr*100):0;return {m,pct};};
+  const el=document.getElementById("admList");
   el.innerHTML=CATS.map(c=>{const items=PRODS.filter(p=>p.categoria_id===c.id);if(items.length===0)return "";
     return `<div class="adm-catsec" style="--cc:${c.color};--csoft:${soften(c.color)}"><div class="adm-cathead"><span class="dot"></span>${c.nombre}</div>
       ${items.map(p=>{const g=marg(p.precio,p.costo||0);
-        return `<div class="adm-row"><div class="an ${p.activo?"":"off"}">${p.nombre}</div>
-        <div class="adm-fields">
-          <label class="adm-inp"><span>Precio</span><input type="number" min="0" step="100" value="${p.precio}" data-price="${p.id}"></label>
-          <label class="adm-inp"><span>Costo</span><input type="number" min="0" step="100" value="${p.costo||0}" data-cost="${p.id}"></label>
-          <span class="adm-marg" data-marg="${p.id}">${clp(g.m)}<small>${g.pct}%</small></span>
-          <button class="adm-save" data-saveprod="${p.id}">Guardar</button>
-        </div>
-        <button class="adm-tog ${p.activo?"on":""}" data-tog="${p.id}">${p.activo?"Activo":"Inactivo"}</button></div>`;}).join("")}
+        return `<div class="padm-row">
+          <div class="pn ${p.activo?"":"off"}"><b>${p.nombre}</b><small>Costo ${clp(p.costo||0)} · Margen ${clp(g.m)} (${g.pct}%)</small></div>
+          <span class="padm-price">${clp(p.precio)}</span>
+          <div class="padm-acts">
+            <button class="iact edit" data-edit="${p.id}" title="Editar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></button>
+            <button class="iact tog ${p.activo?"on":""}" data-tog="${p.id}" title="${p.activo?"Activo (tocar para ocultar)":"Inactivo (tocar para mostrar)"}">${p.activo?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.9 4.2A9.1 9.1 0 0 1 12 4c7 0 10 8 10 8a13 13 0 0 1-2 2.9M6.6 6.6A13 13 0 0 0 2 12s3 8 10 8a9 9 0 0 0 4-.9"/><path d="m2 2 20 20"/></svg>'}</button>
+            <button class="iact del" data-del="${p.id}" title="Eliminar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+          </div></div>`;}).join("")}
     </div>`;}).join("");
-  const refreshMarg=(id)=>{const pr=+el.querySelector(`[data-price="${id}"]`).value||0;const co=+el.querySelector(`[data-cost="${id}"]`).value||0;const g=marg(pr,co);const cell=el.querySelector(`[data-marg="${id}"]`);cell.innerHTML=`${clp(g.m)}<small>${g.pct}%</small>`;cell.style.color=g.m<0?"var(--danger)":"var(--ink)";const p=byId(id);el.querySelector(`[data-saveprod="${id}"]`).classList.toggle("dirty",pr!==p.precio||co!==(p.costo||0));};
-  el.querySelectorAll("[data-price],[data-cost]").forEach(inp=>{inp.oninput=()=>refreshMarg(inp.dataset.price||inp.dataset.cost);});
-  el.querySelectorAll("[data-saveprod]").forEach(btn=>{btn.onclick=async()=>{const id=+btn.dataset.saveprod;const pr=parseInt(el.querySelector(`[data-price="${id}"]`).value,10);const co=parseInt(el.querySelector(`[data-cost="${id}"]`).value,10);if(isNaN(pr)||pr<0||isNaN(co)||co<0){toast("Precio o costo inválido",true);return;}const r=await db.from("productos").update({precio:pr,costo:co}).eq("id",id);if(r.error){toast("No se pudo guardar.",true);return;}const p=byId(id);p.precio=pr;p.costo=co;btn.classList.remove("dirty");renderSections();toast("Producto actualizado");};});
-  el.querySelectorAll("[data-tog]").forEach(btn=>{btn.onclick=async()=>{const p=byId(btn.dataset.tog);const r=await db.from("productos").update({activo:!p.activo}).eq("id",p.id);if(r.error){toast("No se pudo cambiar el estado.",true);return;}p.activo=!p.activo;delete cart[p.id];renderAdmin();renderSections();renderChips();renderCart();renderCartBar();toast(p.activo?"Producto activado":"Producto desactivado");};});
-  document.getElementById("npAdd").onclick=async()=>{const name=document.getElementById("npName").value.trim();const catId=+document.getElementById("npCat").value;const price=parseInt(document.getElementById("npPrice").value,10);const cost=parseInt(document.getElementById("npCost").value,10)||0;if(!name){toast("Escribe el nombre",true);return;}if(isNaN(price)||price<0){toast("Precio inválido",true);return;}if(cost<0){toast("Costo inválido",true);return;}const r=await db.from("productos").insert({categoria_id:catId,nombre:name,precio:price,costo:cost}).select().single();if(r.error){toast("No se pudo agregar.",true);return;}PRODS.push(r.data);document.getElementById("npName").value="";document.getElementById("npPrice").value="";document.getElementById("npCost").value="";renderAdmin();renderSections();renderChips();toast("Producto agregado: "+name);};
+
+  el.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>openEdit(+b.dataset.edit));
+  el.querySelectorAll("[data-tog]").forEach(b=>b.onclick=async()=>{const p=byId(b.dataset.tog);const r=await db.from("productos").update({activo:!p.activo}).eq("id",p.id);if(r.error){toast("No se pudo cambiar el estado.",true);return;}p.activo=!p.activo;if(!p.activo)delete cart[p.id];renderChips();renderSections();renderCart();renderCartBar();renderAdmin();toast(p.activo?"Producto activado":"Producto desactivado");});
+  el.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>deleteProduct(+b.dataset.del));
+
+  // alta de producto
+  document.getElementById("npAdd").onclick=async()=>{const name=document.getElementById("npName").value.trim();const catId=+document.getElementById("npCat").value;const price=parseInt(document.getElementById("npPrice").value,10);const cost=parseInt(document.getElementById("npCost").value,10)||0;if(!name){toast("Escribe el nombre",true);return;}if(isNaN(price)||price<0){toast("Precio inválido",true);return;}if(cost<0){toast("Costo inválido",true);return;}const r=await db.from("productos").insert({categoria_id:catId,nombre:name,precio:price,costo:cost}).select().single();if(r.error){toast("No se pudo agregar.",true);return;}PRODS.push(r.data);document.getElementById("npName").value="";document.getElementById("npPrice").value="";document.getElementById("npCost").value="";renderChips();renderSections();renderAdmin();toast("Producto agregado: "+name);};
+
+  renderCategorias();
+}
+
+async function deleteProduct(id){
+  const p=byId(id); if(!p) return;
+  if(!confirm(`¿Eliminar "${p.nombre}"? Esta acción no se puede deshacer.`)) return;
+  const r=await db.from("productos").delete().eq("id",id);
+  if(r.error){
+    if(isFK(r.error)){ toast("Tiene ventas registradas; desactívalo en vez de borrarlo.",true); }
+    else{ toast("No se pudo eliminar.",true); }
+    return;
+  }
+  PRODS=PRODS.filter(x=>x.id!==id); delete cart[id];
+  renderChips();renderSections();renderCart();renderCartBar();renderAdmin();
+  toast("Producto eliminado");
+}
+
+/* ---- modal editar producto ---- */
+let editingId=null;
+function openEdit(id){
+  const p=byId(id); if(!p) return;
+  editingId=id;
+  document.getElementById("epName").value=p.nombre;
+  document.getElementById("epCat").value=p.categoria_id;
+  document.getElementById("epPrice").value=p.precio;
+  document.getElementById("epCost").value=p.costo||0;
+  refreshEditMarg();
+  document.getElementById("editProd").classList.add("show");
+}
+function closeEdit(){ document.getElementById("editProd").classList.remove("show"); editingId=null; }
+function refreshEditMarg(){
+  const pr=+document.getElementById("epPrice").value||0;
+  const co=+document.getElementById("epCost").value||0;
+  const m=pr-co, pct=pr>0?Math.round(m/pr*100):0;
+  const el=document.getElementById("epMarg");
+  el.textContent=`Margen: ${clp(m)} (${pct}%)`;
+  el.style.color=m<0?"var(--danger)":"var(--ink2)";
+}
+async function saveEdit(){
+  if(editingId==null) return;
+  const name=document.getElementById("epName").value.trim();
+  const catId=+document.getElementById("epCat").value;
+  const price=parseInt(document.getElementById("epPrice").value,10);
+  const cost=parseInt(document.getElementById("epCost").value,10)||0;
+  if(!name){toast("El nombre no puede quedar vacío",true);return;}
+  if(isNaN(price)||price<0){toast("Precio inválido",true);return;}
+  if(cost<0){toast("Costo inválido",true);return;}
+  const r=await db.from("productos").update({nombre:name,categoria_id:catId,precio:price,costo:cost}).eq("id",editingId);
+  if(r.error){toast("No se pudo guardar.",true);return;}
+  const p=byId(editingId); p.nombre=name; p.categoria_id=catId; p.precio=price; p.costo=cost;
+  closeEdit();
+  renderChips();renderSections();renderAdmin();
+  toast("Producto actualizado");
+}
+
+/* ================= Admin: categorías ================= */
+function renderCategorias(){
+  const el=document.getElementById("catList");
+  el.innerHTML=CATS.map(c=>{
+    const n=PRODS.filter(p=>p.categoria_id===c.id).length;
+    return `<div class="cadm-row">
+      <input type="color" value="${c.color}" data-ccolor="${c.id}">
+      <input class="cname" value="${c.nombre.replace(/"/g,'&quot;')}" data-cname="${c.id}">
+      <span class="cord-l">Orden</span><input class="cord" type="number" value="${c.orden}" data-cord="${c.id}">
+      <span class="cadm-count">${n} prod.</span>
+      <button class="csave" data-csave="${c.id}">Guardar</button>
+      <button class="cdel" data-cdel="${c.id}" title="Eliminar sección"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+    </div>`;}).join("");
+  const dirtyCheck=(id)=>{const c=catById(id);const nm=el.querySelector(`[data-cname="${id}"]`).value.trim();const co=el.querySelector(`[data-ccolor="${id}"]`).value;const or=+el.querySelector(`[data-cord="${id}"]`).value;el.querySelector(`[data-csave="${id}"]`).classList.toggle("dirty",nm!==c.nombre||co.toLowerCase()!==c.color.toLowerCase()||or!==c.orden);};
+  el.querySelectorAll("[data-cname],[data-ccolor],[data-cord]").forEach(inp=>{const id=+(inp.dataset.cname||inp.dataset.ccolor||inp.dataset.cord);inp.oninput=()=>dirtyCheck(id);});
+  el.querySelectorAll("[data-csave]").forEach(btn=>{btn.onclick=async()=>{const id=+btn.dataset.csave;const nm=el.querySelector(`[data-cname="${id}"]`).value.trim();const co=el.querySelector(`[data-ccolor="${id}"]`).value;const or=parseInt(el.querySelector(`[data-cord="${id}"]`).value,10)||0;if(!nm){toast("El nombre no puede quedar vacío",true);return;}const r=await db.from("categorias").update({nombre:nm,color:co,orden:or}).eq("id",id);if(r.error){toast("No se pudo guardar la sección.",true);return;}await reloadCatalog();toast("Sección actualizada");};});
+  el.querySelectorAll("[data-cdel]").forEach(btn=>{btn.onclick=async()=>{const id=+btn.dataset.cdel;const c=catById(id);const n=PRODS.filter(p=>p.categoria_id===id).length;if(n>0){toast("La sección tiene productos; muévelos o elimínalos primero.",true);return;}if(!confirm(`¿Eliminar la sección "${c.nombre}"?`))return;const r=await db.from("categorias").delete().eq("id",id);if(r.error){if(isFK(r.error))toast("La sección tiene productos asociados.",true);else toast("No se pudo eliminar.",true);return;}await reloadCatalog();toast("Sección eliminada");};});
+
+  document.getElementById("ncAdd").onclick=async()=>{
+    const name=document.getElementById("ncName").value.trim();
+    const color=document.getElementById("ncColor").value;
+    if(!name){toast("Escribe el nombre de la sección",true);return;}
+    const nextOrden=(CATS.reduce((m,c)=>Math.max(m,c.orden),0))+1;
+    const r=await db.from("categorias").insert({nombre:name,color,orden:nextOrden}).select().single();
+    if(r.error){toast("No se pudo crear la sección.",true);return;}
+    document.getElementById("ncName").value="";
+    await reloadCatalog();
+    toast("Sección creada: "+name);
+  };
 }
 
 /* ================= Toast / navegación ================= */
@@ -768,6 +952,11 @@ async function bootApp(){
     document.getElementById("copyExcel").onclick=copyForExcel;
     document.getElementById("downloadCsv").onclick=downloadCsv;
     document.getElementById("goalInput").onchange=(e)=>{const v=parseFloat(e.target.value);if(!isNaN(v)&&v>0){goal=v;localStorage.setItem("pos.goal",String(goal));renderSummary();}};
+    document.getElementById("epClose").onclick=closeEdit;
+    document.getElementById("epCancel").onclick=closeEdit;
+    document.getElementById("epSave").onclick=saveEdit;
+    document.getElementById("epPrice").oninput=refreshEditMarg;
+    document.getElementById("epCost").oninput=refreshEditMarg;
   }
 
   const bar=document.createElement("div");bar.className="cartbar";bar.id="cartbar";
